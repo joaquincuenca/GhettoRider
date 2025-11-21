@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.ghettorider.presentation.ui.login.LoginScreen
+import com.example.ghettorider.presentation.ui.onboarding.OnboardingScreen1
 
 @Composable
 fun NavGraph(modifier: Modifier = Modifier) {
@@ -14,10 +14,10 @@ fun NavGraph(modifier: Modifier = Modifier) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = NavRoutes.Login.route
+        startDestination = NavRoutes.Onboarding1.route
     ) {
-        composable(NavRoutes.Login.route) {
-            LoginScreen()
+        composable(NavRoutes.Onboarding1.route) {
+            OnboardingScreen1()
         }
     }
 }
