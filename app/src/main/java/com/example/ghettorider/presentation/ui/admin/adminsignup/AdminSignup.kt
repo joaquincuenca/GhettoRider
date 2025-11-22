@@ -1,4 +1,4 @@
-package com.example.ghettorider.presentation.ui.admin.adminglogin
+package com.example.ghettorider.presentation.ui.admin.adminsignup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,29 +18,29 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AdminLoginScreen(
-    onLoginClick: (String, String) -> Unit = { _, _ -> },
-    onSignupClick: () -> Unit = {},
+fun AdminSignupScreen(
+    onSignupClick: (String, String, String) -> Unit = { _, _, _ -> },
     onGoogleSignup: () -> Unit = {}
 ) {
+    var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
 
-    Scaffold { innerPadding ->
+    Scaffold{ innerPadding ->
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.onSurface)
                 .padding(innerPadding)
+                .background(Color.Black)
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
 
             Text(
-                text = "ADMIN LOGIN",
+                text = "ADMIN SIGNUP",
                 style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Black),
                 color = Color(0xFFFFFF00)
             )
@@ -48,6 +48,26 @@ fun AdminLoginScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             // USERNAME
+            OutlinedTextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text("Username", color = Color.White) },
+                singleLine = true,
+                shape = RoundedCornerShape(16.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFFFFD700),
+                    unfocusedBorderColor = Color.LightGray,
+                    focusedLabelColor = Color(0xFFFFD700),
+                    cursorColor = Color(0xFFFFD700),
+                    focusedTextColor = Color.White,
+                    unfocusedTextColor = Color.White
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // EMAIL
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -67,7 +87,7 @@ fun AdminLoginScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // PASSWORD FIELD + EYE ICON
+            // PASSWORD
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -79,7 +99,7 @@ fun AdminLoginScreen(
                     IconButton(onClick = { showPassword = !showPassword }) {
                         Icon(
                             imageVector = if (showPassword) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                            contentDescription = "Toggle Password Visibility",
+                            contentDescription = "Toggle Password",
                             tint = Color(0xFFFFD700)
                         )
                     }
@@ -97,9 +117,9 @@ fun AdminLoginScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // LOGIN BUTTON
+            // SIGNUP BUTTON
             Button(
-                onClick = { onLoginClick(email, password) },
+                onClick = { onSignupClick(username, email, password) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
@@ -110,25 +130,14 @@ fun AdminLoginScreen(
                 )
             ) {
                 Text(
-                    text = "Login",
+                    text = "Sign Up",
                     style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
                 )
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // SIGNUP TEXT
-            Text(
-                text = "No account yet? Sign up here",
-                color = Color(0xFFFFD700),
-                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                modifier = Modifier.clickable { onSignupClick() }
-            )
-
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // DIVIDER WITH OR
+            // OR DIVIDER
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
@@ -154,7 +163,7 @@ fun AdminLoginScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // GOOGLE BUTTON
+            // GOOGLE SIGNUP BUTTON
             Button(
                 onClick = onGoogleSignup,
                 modifier = Modifier
