@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ghettorider.presentation.ui.onboarding.OnboardingScreen1
+import com.example.ghettorider.presentation.ui.admin.adminglogin.AdminLoginScreen
 
 @Composable
 fun NavGraph(modifier: Modifier = Modifier) {
@@ -16,8 +17,20 @@ fun NavGraph(modifier: Modifier = Modifier) {
         navController = navController,
         startDestination = NavRoutes.Onboarding1.route
     ) {
+        // Onboarding
         composable(NavRoutes.Onboarding1.route) {
-            OnboardingScreen1()
+            OnboardingScreen1(
+                onAdminClick = {
+                    navController.navigate(NavRoutes.AdminLogin.route)
+                }
+            )
+        }
+
+        // Admin Login
+        composable(NavRoutes.AdminLogin.route) {
+            AdminLoginScreen(
+                onBackClick = { navController.popBackStack() }
+            )
         }
     }
 }
