@@ -37,7 +37,10 @@ import androidx.core.view.WindowCompat
 import com.example.ghettorider.R
 
 @Composable
-fun OnboardingScreen1(onAdminClick: () -> Unit = {}) {
+fun OnboardingScreen1(
+    onAdminClick: () -> Unit = {},
+    onBookRide: () -> Unit = {}
+    ) {
     val view = LocalView.current
     val window = (view.context as Activity).window
 
@@ -119,7 +122,7 @@ fun OnboardingScreen1(onAdminClick: () -> Unit = {}) {
                 .padding(bottom = 64.dp)
         ) {
             Button(
-                onClick = { /*TODO Implement Booking*/ },
+                onClick = { onBookRide() },
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFFFD700),

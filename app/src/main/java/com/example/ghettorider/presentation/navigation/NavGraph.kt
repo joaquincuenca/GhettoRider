@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.ghettorider.presentation.ui.onboarding.OnboardingScreen1
 import com.example.ghettorider.presentation.ui.admin.adminglogin.AdminLoginScreen
 import com.example.ghettorider.presentation.ui.admin.adminsignup.AdminSignupScreen
+import com.example.ghettorider.presentation.ui.dashboard.DashboardScreen
 
 @Composable
 fun NavGraph(modifier: Modifier = Modifier) {
@@ -23,7 +24,11 @@ fun NavGraph(modifier: Modifier = Modifier) {
             OnboardingScreen1(
                 onAdminClick = {
                     navController.navigate(NavRoutes.AdminLogin.route)
+                },
+                onBookRide = {
+                    navController.navigate(NavRoutes.Dashboard.route)
                 }
+
             )
         }
 
@@ -36,6 +41,11 @@ fun NavGraph(modifier: Modifier = Modifier) {
         // Admin Signup
         composable(NavRoutes.AdminSignup.route) {
             AdminSignupScreen()
+        }
+
+        // Admin Signup
+        composable(NavRoutes.Dashboard.route) {
+            DashboardScreen()
         }
     }
 }
